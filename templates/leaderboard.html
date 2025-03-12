@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Leaderboard - Quiz App{% endblock %}
+
+{% block content %}
+<section class="leaderboard-container">
+    <h1>Leaderboard</h1>
+    
+    <div class="leaderboard-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Quiz</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ score[0] }}</td>
+                    <td>{{ score[1] }}</td>
+                    <td>{{ score[2] }}</td>
+                    <td>{{ score[3] }}</td>
+                    <td>{{ score[4].strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

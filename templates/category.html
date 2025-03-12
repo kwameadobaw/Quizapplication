@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - Quiz App{% endblock %}
+
+{% block content %}
+<section class="category-page">
+    <h1>{{ category.name }} Quizzes</h1>
+    
+    <div class="quizzes">
+        {% for quiz in quizzes %}
+        <div class="quiz-card">
+            <h2>{{ quiz.title }}</h2>
+            <a href="{{ url_for('quiz', quiz_id=quiz.id) }}" class="btn">Start Quiz</a>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+</section>
+{% endblock %}

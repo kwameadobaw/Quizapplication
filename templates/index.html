@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Quiz App{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to Quiz App</h1>
+        <p>Test your knowledge with our quizzes in various categories!</p>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+        {% else %}
+        <div class="hero-buttons">
+            <a href="{{ url_for('login') }}" class="btn">Login</a>
+            <a href="{{ url_for('signup') }}" class="btn btn-secondary">Sign Up</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <h2>Multiple Categories</h2>
+        <p>Explore quizzes in Technology, General Knowledge, Science, and more!</p>
+    </div>
+    <div class="feature">
+        <h2>Track Your Progress</h2>
+        <p>See your scores and compare with others on the leaderboard.</p>
+    </div>
+    <div class="feature">
+        <h2>Learn and Improve</h2>
+        <p>Challenge yourself with new quizzes and expand your knowledge.</p>
+    </div>
+</section>
+{% endblock %}

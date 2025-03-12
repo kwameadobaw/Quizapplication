@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Results - {{ quiz.title }}{% endblock %}
+
+{% block content %}
+<section class="results-container">
+    <h1>Your Results for {{ quiz.title }}</h1>
+    
+    {% if scores %}
+    <div class="results-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Attempt</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in scores %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ score.score }} / {{ total_questions }}</td>
+                    <td>{{ score.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ (score.score / total_questions * 100) | round(1) }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="quiz-actions">
+        <a href="{{ url_for('quiz', quiz_id=quiz.id) }}" class="btn">Retake Quiz</a>
+        <a href="{{ url_for('category', category_id=quiz.category_id) }}" class="btn btn-secondary">Back to Category</a>
+    </div>
+    {% else %}
+    <p>You haven't taken this quiz yet.</p>
+    <div class="quiz-actions">
+        <a href="{{ url_for('quiz', quiz_id=quiz.id) }}" class="btn">Take Quiz</a>
+        <a href="{{ url_for('category', category_id=quiz.category_id) }}" class="btn btn-secondary">Back to Category</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

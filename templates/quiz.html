@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ quiz.title }} - Quiz App{% endblock %}
+
+{% block content %}
+<section class="quiz-container">
+    <h1>{{ quiz.title }}</h1>
+    
+    <form method="POST" action="{{ url_for('submit_quiz', quiz_id=quiz.id) }}" id="quiz-form">
+        {% for question in questions %}
+        <div class="question-card">
+            <h3>Question {{ loop.index }}: {{ question.content }}</h3>
+            <div class="options">
+                {% for option in question.options %}
+                <div class="option">
+                    <input type="radio" id="q{{ question.id }}_o{{ option.id }}" 
+                           name="question_{{ question.id }}" value="{{ option.id }}" required>
+                    <label for="q{{ question.id }}_o{{ option.id }}">{{ option.content }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn">Submit Answers</button>
+    </form>
+</section>
+{% endblock %}
